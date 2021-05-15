@@ -6,5 +6,11 @@ With this project I want to switch a relay on and off using a remote control tha
 ![Image](https://github.com/DannyOnkies/IRrelay/blob/main/pic/photoaf%20(1).jpg "icon")
 
  With this project https://github.com/DannyOnkies/ObtainIRcodes I was able to find out which decimal 
- codes the remote emitted 
+ codes the remote emitted.
+ 
+ In this video you can see how the program works.
+ 
+ https://github.com/DannyOnkies/IRrelay/blob/main/video/IR_COMMAND.mp4
+ 
+ 
 
