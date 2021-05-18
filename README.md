@@ -1,6 +1,9 @@
 # IRrelay
 Turn on a lamp with a relay and a remote control
 
+# Upgrade
+* 19/05/2021 - Memory was filled abnormally. I have inserted a **`gs.collect()`** instruction, to free up the memory at each cycle. Also, the **`decode_it()`** function has been rewritten. Now 6 readings are carried out at each cycle in order to read 3 bits. 
+
 # Project
 With this project I want to switch a relay on and off using a remote control that I don't use.
 ![Image](https://github.com/DannyOnkies/IRrelay/blob/main/pic/photoaf%20(1).jpg "icon")
