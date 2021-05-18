@@ -110,6 +110,8 @@ class IrRemote:
         print("Pos. StartBit",tmp1)
         #FREE MEMORY
         gc.collect()
+        mem = gc.mem_free()
+        heap = gc.mem_alloc()
         if tmp1 is not None:
             if tmp1 > 0:
                 code = self.prot_nec(lista)
