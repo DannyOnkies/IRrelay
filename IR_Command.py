@@ -6,6 +6,7 @@ import pyb
 from pyb import Pin, Timer
 import machine
 import sys
+import gc
 
 class IrRemote:
     # Limits for the BIT START
@@ -19,23 +20,31 @@ class IrRemote:
 
     def decode_ir(self):
         # the IR remote control signal comes
-         # sent to PIN_X10      
+        # sent to PIN_X10      
         ingresso = Pin(self._irpin, Pin.IN, Pin.PULL_UP)
         lettura_tot = []
-        copia_lettura_tot = []
-        #for i in range(50):
         while True:
             read1 = machine.time_pulse_us(ingresso,0)
             read2 = machine.time_pulse_us(ingresso,1)
-            #print(len(lettura_tot))
+            read3 = machine.time_pulse_us(ingresso,0)
+            read4 = machine.time_pulse_us(ingresso,1)
+            read5 = machine.time_pulse_us(ingresso,0)
+            read6 = machine.time_pulse_us(ingresso,1)
             if read1 > 0 :
                 lettura_tot.append(read1)
             if read2 > 0 :
                 lettura_tot.append(read2)
-            if len(lettura_tot) > 70 :
-                copia_lettura_tot = lettura_tot
-                lettura_tot = []
-                return copia_lettura_tot
+            if read3 > 0 :
+                lettura_tot.append(read3)
+            if read4 > 0 :
+                lettura_tot.append(read4)
+            if read5 > 0 :
+                lettura_tot.append(read5)
+            if read6> 0 :
+                lettura_tot.append(read6)
+                
+            if len(lettura_tot) > 64 :
+                return lettura_tot
 
         
         
@@ -99,6 +108,8 @@ class IrRemote:
     def identify_prot(self,lista):
         tmp1 = (self.trovaflag(lista, 8000, 10000, 4300, 4700))
         print("Pos. StartBit",tmp1)
+        #FREE MEMORY
+        gc.collect()
         if tmp1 is not None:
             if tmp1 > 0:
                 code = self.prot_nec(lista)
